@@ -105,4 +105,34 @@ h2 {
   background-color: #ffffff;
   overflow: hidden; /* Prevent overflow of text */
 }
+.dropdown-container {
+  position: relative;
+}
 
+.dropdown-options {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  z-index: 1;
+  width: 200px; /* Adjust width as needed */
+  padding: 10px;
+}
+
+.grouping-options, .ordering-options {
+  margin-bottom: 10px;
+}
+
+.option {
+  cursor: pointer;
+  padding: 5px;
+  transition: background 0.2s;
+}
+
+.option:hover {
+  background: #f0f0f0; /* Highlight on hover */
+}
+
+.selected {
+  background: #d1e7dd; /* Highlight selected option */
+  font-weight: bold; /* Make the selected option bold */
+}
