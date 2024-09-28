@@ -5,7 +5,6 @@
 .App-header {
   background-color: #eff0f0;
   min-height: 100vh;
-  
   flex-direction: column;
   align-items: center;
   color: rgb(12, 0, 0);
@@ -14,6 +13,7 @@
 .Display {
   text-align: left;
   padding: 20px;
+  gap: 10px;
 }
 
 .status-section-container {
@@ -24,7 +24,7 @@
 
 .status-section {
   flex: 1; /* Each section will take equal width */
-  padding: 50px;
+  padding: 20px;
   border-radius: 10px;
 }
 
@@ -35,7 +35,7 @@ h2 {
 .card-container {
   display: flex;
   flex-direction: column; /* Stack cards vertically */
-  gap: 30px; /* Space between cards */
+  padding: 10px;
 }
 
 .card {
@@ -135,4 +135,59 @@ h2 {
 .selected {
   background: #d1e7dd; /* Highlight selected option */
   font-weight: bold; /* Make the selected option bold */
+}
+.card {
+  display: flex; /* Align items in a row */
+  align-items: flex-start; /* Align items at the start */
+  justify-content: space-between; /* Space between DP and ticket details */
+  position: relative; /* Positioning for the DP */
+  width: 100%; /* Cards will take full width of the section */
+  height: max-content; /* Fixed height for all cards */
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  background-color: #ffffff;
+}
+
+.dp {
+  width: 40px; /* Size of the DP */
+  height: 40px; /* Size of the DP */
+  border-radius: 50%; /* Circular DP */
+  background-color: #6ea4dd; /* Background color for the DP */
+  color: white; /* Text color */
+  display: flex; /* Center initials */
+  justify-content: center; /* Center initials */
+  align-items: center; /* Center initials */
+  position: absolute; /* Position DP in top right corner */
+  top: 10px; /* Distance from the top */
+  right: 10px; /* Distance from the right */
+  font-size: 16px; /* Font size for initials */
+}
+
+.ticket-details {
+  flex-grow: 1; /* Allow ticket details to take remaining space */
+  margin-right: 50px; /* Add margin to prevent overlap with DP */
+}
+.dp-container {
+  display: inline-block;
+}
+
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top:30%;
+  right: 6%;
+}
+
+.status-dot.online {
+  background-color: rgb(9, 108, 9);
+}
+
+.status-dot.offline {
+  background-color: rgb(213, 213, 213);
 }
