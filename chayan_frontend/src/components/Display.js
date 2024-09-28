@@ -11,6 +11,15 @@ function Display() {
     // Define the 5 statuses that should always appear
     const statusCategories = ['Todo', 'In progress', 'Backlog', 'Done', 'Canceled'];
 
+    // Mapping priority values to display names and sort order
+    const priorityLabels = {
+        0: { label: 'No Priority', order: 5 },
+        1: { label: 'Low', order: 4 },
+        2: { label: 'Medium', order: 3 },
+        3: { label: 'High', order: 2 },
+        4: { label: 'Urgent', order: 1 },
+    };
+
     useEffect(() => {
         fetch('https://api.quicksell.co/v1/internal/frontend-assignment')
             .then((response) => response.json())
@@ -37,7 +46,7 @@ function Display() {
             }, {});
         } else if (groupOption === 'Priority') {
             groupedTickets = tickets.reduce((acc, ticket) => {
-                const priorityLevel = ticket.priority === 0 ? 'No Priority' : ticket.priority;
+                const priorityLevel = priorityLabels[ticket.priority]?.label || 'Unknown'; // Get priority label
                 acc[priorityLevel] = acc[priorityLevel] || [];
                 acc[priorityLevel].push(ticket);
                 return acc;
@@ -49,7 +58,11 @@ function Display() {
             if (orderOption === 'Title') {
                 return tickets.sort((a, b) => a.title.localeCompare(b.title));
             } else {
-                return tickets.sort((a, b) => a.priority - b.priority);
+                return tickets.sort((a, b) => {
+                    const priorityA = priorityLabels[a.priority]?.order || 6; // Default to a higher value if unknown
+                    const priorityB = priorityLabels[b.priority]?.order || 6; // Default to a higher value if unknown
+                    return priorityA - priorityB; // Sort based on order
+                });
             }
         };
 
@@ -57,8 +70,8 @@ function Display() {
         const sections = Object.keys(groupedTickets).map(group => (
             <div className="status-section" key={group}>
                 <div className="cards_header">
-                <h4>{group} {} {groupedTickets[group].length}</h4> {/* Display count */}
-                <h4>+ ...</h4>
+                    <h4>{group} ({groupedTickets[group].length})</h4> {/* Display count */}
+                    <h4>+ ...</h4>
                 </div>
                 <div className="card-container">
                     {groupedTickets[group].length === 0 ? (
@@ -70,6 +83,10 @@ function Display() {
                             // Get initials from the user's name
                             const initials = user ? user.name.split(' ').map(n => n[0].toUpperCase()).join('') : '';
 
+                            // Determine what to display based on grouping option
+                            const displayPriority = groupOption === 'Status' ? `${priorityLabels[ticket.priority]?.label}` : '';
+                            const displayStatus = (groupOption === 'User' || groupOption === 'Priority') ? `${ticket.status}` : '';
+
                             return (
                                 <div className="card" key={index}>
                                     <div className="dp-container">
@@ -79,7 +96,8 @@ function Display() {
                                     <div className="ticket-details">
                                         <p>{ticket.id}</p>
                                         <h6>{ticket.title.length > 50 ? ticket.title.slice(0, 50) + '...' : ticket.title}</h6>
-                                        <p>{"..."+"  "+ticket.tag.join(', ')}</p>
+                                        <p2>{displayPriority || displayStatus}</p2> {/* Show priority or status based on grouping */}
+                                        <p2>{ticket.tag.join(', ')}</p2>
                                     </div>
                                 </div>
                             );
