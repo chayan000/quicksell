@@ -1,38 +1,108 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  text-align: left;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #eff0f0;
   min-height: 100vh;
-  display: flex;
+  
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(12, 0, 0);
 }
 
-.App-link {
-  color: #61dafb;
+.Display {
+  text-align: left;
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.status-section-container {
+  display: flex; /* Horizontal alignment */
+  justify-content: space-between; /* Even space between sections */
+  gap: 10px; /* Gap between the sections */
 }
+
+.status-section {
+  flex: 1; /* Each section will take equal width */
+  padding: 50px;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  gap: 30px; /* Space between cards */
+}
+
+.card {
+  width: 100%; /* Cards will take full width of the section */
+  height: 150px;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  background-color: #ffffff;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h6 {
+  display: -webkit-box;          /* Use a box model for the flex container */
+  -webkit-box-orient: vertical; /* Set orientation to vertical */
+  overflow: hidden;              /* Hide overflow text */
+  text-overflow: ellipsis;       /* Show ellipsis for truncated text */
+  -webkit-line-clamp: 2;        /* Limit to 2 lines */
+  max-height: 3em;              /* Control the height (line height * 2) */
+  line-height: 1;           /* Set line height for better spacing */
+}
+
+.card p{
+  line-height: 1; 
+}
+
+.dropdown-container{
+  background-color: #ffffff;
+  padding: 10px;
+}
+.dropdown-container {
+  margin: 20px 0;
+}
+
+.Display {
+  display: flex;
+  flex-direction: row; /* Stack sections vertically */
+}
+
+.status-section {
+  display: flex;
+  flex-direction: column; /* Stack headings and cards vertically */
+  margin-bottom: 20px;
+}
+
+.status-section h2 {
+  margin: 0; /* Remove default margin for headings */
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column; /* Stack cards vertically under each heading */
+}
+
+.card {
+  height: 150px; /* Keep the height consistent */
+  padding: 5px;
+  margin: 5px 0; /* Reduced margin for closer alignment */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  background-color: #ffffff;
+  overflow: hidden; /* Prevent overflow of text */
+}
+
