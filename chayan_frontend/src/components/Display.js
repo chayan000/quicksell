@@ -56,7 +56,10 @@ function Display() {
         // Render the grouped tickets
         const sections = Object.keys(groupedTickets).map(group => (
             <div className="status-section" key={group}>
-                <h2>{group}</h2>
+                <div className="cards_header">
+                <h4>{group} {} {groupedTickets[group].length}</h4> {/* Display count */}
+                <h4>+ ...</h4>
+                </div>
                 <div className="card-container">
                     {groupedTickets[group].length === 0 ? (
                         <p>No tickets in this category.</p>
@@ -76,7 +79,7 @@ function Display() {
                                     <div className="ticket-details">
                                         <p>{ticket.id}</p>
                                         <h6>{ticket.title.length > 50 ? ticket.title.slice(0, 50) + '...' : ticket.title}</h6>
-                                        <p>{ticket.tag.join(', ')}</p>
+                                        <p>{"..."+"  "+ticket.tag.join(', ')}</p>
                                     </div>
                                 </div>
                             );

@@ -12,7 +12,6 @@
 
 .Display {
   text-align: left;
-  padding: 20px;
   gap: 10px;
 }
 
@@ -30,12 +29,6 @@
 
 h2 {
   text-align: center;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: column; /* Stack cards vertically */
-  padding: 10px;
 }
 
 .card {
@@ -71,9 +64,7 @@ h2 {
   background-color: #ffffff;
   padding: 10px;
 }
-.dropdown-container {
-  margin: 20px 0;
-}
+
 
 .Display {
   display: flex;
@@ -190,4 +181,9 @@ h2 {
 
 .status-dot.offline {
   background-color: rgb(213, 213, 213);
+}
+.cards_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
