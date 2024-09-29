@@ -177,3 +177,17 @@ h2 {
 button{
   font-size: large;
 }
+
+.icon-tag-container {
+  display: flex;           
+  align-items: center;     
+  gap: 5px;
+}
+
+.icon {
+  margin-right: 8px;   
+}
+
+.tags {
+  margin-left: 10px;      
+}
