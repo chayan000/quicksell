@@ -11,13 +11,22 @@ function Display() {
     // Define the 5 statuses that should always appear
     const statusCategories = ['Todo', 'In progress', 'Backlog', 'Done', 'Canceled'];
 
-    // Mapping priority values to display names and sort order
-    const priorityLabels = {
-        0: { label: 'No Priority', order: 5 },
-        1: { label: 'Low', order: 4 },
-        2: { label: 'Medium', order: 3 },
-        3: { label: 'High', order: 2 },
-        4: { label: 'Urgent', order: 1 },
+    // Mapping priority values to colors and sort order
+    const priorityStyles = {
+        0: { label: 'No Priority', order: 5, color: '#808080' }, // Gray
+        1: { label: 'Low', order: 4, color: '#2E8B57' }, // Green
+        2: { label: 'Medium', order: 3, color: '#FFA500' }, // Orange
+        3: { label: 'High', order: 2, color: '#FF6347' }, // Red
+        4: { label: 'Urgent', order: 1, color: '#FF0000' }, // Bright Red
+    };
+
+    // Mapping statuses to specific colors
+    const statusStyles = {
+        'Todo': { color: '#1E90FF' }, // Blue
+        'In progress': { color: '#FFD700' }, // Yellow
+        'Backlog': { color: '#FF4500' }, // Orange Red
+        'Done': { color: '#32CD32' }, // Lime Green
+        'Canceled': { color: '#A9A9A9' }, // Dark Gray
     };
 
     useEffect(() => {
@@ -46,7 +55,7 @@ function Display() {
             }, {});
         } else if (groupOption === 'Priority') {
             groupedTickets = tickets.reduce((acc, ticket) => {
-                const priorityLevel = priorityLabels[ticket.priority]?.label || 'Unknown'; // Get priority label
+                const priorityLevel = priorityStyles[ticket.priority]?.label || 'Unknown'; // Get priority label
                 acc[priorityLevel] = acc[priorityLevel] || [];
                 acc[priorityLevel].push(ticket);
                 return acc;
@@ -59,8 +68,8 @@ function Display() {
                 return tickets.sort((a, b) => a.title.localeCompare(b.title));
             } else {
                 return tickets.sort((a, b) => {
-                    const priorityA = priorityLabels[a.priority]?.order || 6; // Default to a higher value if unknown
-                    const priorityB = priorityLabels[b.priority]?.order || 6; // Default to a higher value if unknown
+                    const priorityA = priorityStyles[a.priority]?.order || 6; // Default to a higher value if unknown
+                    const priorityB = priorityStyles[b.priority]?.order || 6; // Default to a higher value if unknown
                     return priorityA - priorityB; // Sort based on order
                 });
             }
@@ -84,8 +93,16 @@ function Display() {
                             const initials = user ? user.name.split(' ').map(n => n[0].toUpperCase()).join('') : '';
 
                             // Determine what to display based on grouping option
-                            const displayPriority = groupOption === 'Status' ? `${priorityLabels[ticket.priority]?.label}` : '';
-                            const displayStatus = (groupOption === 'User' || groupOption === 'Priority') ? `${ticket.status}` : '';
+                            const displayPriority = groupOption === 'Status' ? (
+                                <span style={{ color: priorityStyles[ticket.priority]?.color }}>
+                                    {priorityStyles[ticket.priority]?.label}
+                                </span>
+                            ) : '';
+                            const displayStatus = (groupOption === 'User' || groupOption === 'Priority') ? (
+                                <span style={{ color: statusStyles[ticket.status]?.color }}>
+                                    {ticket.status}
+                                </span>
+                            ) : '';
 
                             return (
                                 <div className="card" key={index}>
@@ -125,7 +142,7 @@ function Display() {
             {/* Display Dropdown */}
             <div className="dropdown-container">
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                    Display
+                    ⚙ Display
                 </button>
 
                 {isDropdownOpen && (
