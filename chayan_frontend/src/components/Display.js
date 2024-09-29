@@ -90,8 +90,8 @@ function Display() {
             <div className="status-section" key={group}>
                 <div className="cards_header">
                     <h4>
-                        {groupOption === 'Priority' && priorityStyles[group]?.icon} {/* Display priority icon */}
-                        {groupOption !== 'Priority' && statusStyles[group]?.icon} {/* Display status icon */}
+                        {groupOption === 'Priority' && priorityStyles[group]?.icon} 
+                        {groupOption !== 'Priority' && statusStyles[group]?.icon} 
                         {group} ({groupedTickets[group].length})
                     </h4>
                     <h4><Add /><Threedot /></h4>
@@ -108,18 +108,20 @@ function Display() {
 
                             return (
                                 <div className="card" key={index}>
-                                    <div className="dp-container">
+                                    {groupOption != 'User' && <div className="dp-container">
                                         <div className="dp">{initials}</div>
                                         <div className={`status-dot ${user?.available ? 'online' : 'offline'}`}></div>
-                                    </div>
+                                    </div> }
+                                    
                                     <div className="ticket-details">
                                         <p>{ticket.id}</p>
                                         <h6>{ticket.title.length > 50 ? ticket.title.slice(0, 50) + '...' : ticket.title}</h6>
                                         <div className="icon-tag-container">
-                                            {groupOption === 'Status' && <p className="icon">{priorityIcon}</p>} 
+                                            {groupOption === 'Status' && <p className="icon">{priorityIcon}</p>}
                                             {groupOption === 'User' && <p className="icon">{statusIcon}</p>}
-                                            {groupOption === 'Priority' && <p className="icon">{statusIcon}</p>} 
-                                            
+                                            {groupOption === 'User' && <p className="icon">{priorityIcon}</p>}
+                                            {groupOption === 'Priority' && <p className="icon">{statusIcon}</p>}
+
                                             <p className="tags">{ticket.tag.join(', ')}</p>
                                         </div>
                                     </div>
