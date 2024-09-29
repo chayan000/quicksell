@@ -4,8 +4,13 @@ function Display() {
     const [tickets, setTickets] = useState([]);
     const [users, setUsers] = useState([]);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [groupOption, setGroupOption] = useState('Status'); 
-    const [orderOption, setOrderOption] = useState('Priority'); 
+
+    // Retrieve saved preferences or use default values
+    const savedGroupOption = localStorage.getItem('groupOption') || 'Status';
+    const savedOrderOption = localStorage.getItem('orderOption') || 'Priority';
+    
+    const [groupOption, setGroupOption] = useState(savedGroupOption); 
+    const [orderOption, setOrderOption] = useState(savedOrderOption); 
 
     const statusCategories = ['Todo', 'In progress', 'Backlog', 'Done', 'Canceled'];
 
@@ -118,11 +123,13 @@ function Display() {
 
     const handleGroupOptionChange = (option) => {
         setGroupOption(option);
+        localStorage.setItem('groupOption', option); // Save to localStorage
         setIsDropdownOpen(false); // Close dropdown after selection
     };
 
     const handleOrderOptionChange = (option) => {
         setOrderOption(option);
+        localStorage.setItem('orderOption', option); // Save to localStorage
         setIsDropdownOpen(false); // Close dropdown after selection
     };
 
